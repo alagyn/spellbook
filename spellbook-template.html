@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[book.title=]</title>
+  <style>
+    .container {
+      display: grid;
+      column-gap: 5ch;
+      row-gap: 5ch;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    * {
+      background-color: [book.page_bg=];
+      font-family: sans-serif;
+    }
+
+    a:link {
+      text-decoration: none;
+    }
+
+    a:visited {
+          text-decoration: none;
+    }
+
+    a:hover {
+          text-decoration: none;
+    }
+
+    a:active {
+          text-decoration: none;
+    }
+
+    .linkContainer {
+      background-color: [book.tile_bg=];
+      border-radius: 10px;
+      min-height: 50px;
+      padding: 10px;
+      outline: outset [book.tile_bg=];
+      position: relative;
+      transition: bottom 0.2s;
+    }
+
+    .linkContainer:hover {
+      bottom: 5px
+    }
+
+    .linkContainer * {
+      background-color: [book.tile_bg=];
+      color: black;
+    }
+
+    .link-title {
+      background-color: [book.tile_title_bg=];
+      color: [book.tile_title_fg=];
+      border-radius: 5px;
+      padding: 4px;
+      display: block;
+    }
+
+    a.fill-div {
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+    }
+
+    .innerLinkContainer {
+      display: grid;
+      grid-template-columns: min-content auto;
+      column-gap: 5ch;
+    }
+
+    .link-desc {
+      padding-left: 10px;
+      padding-top: 5px;
+    }
+
+    img.link-icon {
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+[for idx, link in enumerate(book.links):]
+  <a class="linkContainer" href="[link.href=]">
+    <div class="fill-div">
+      <div class="innerLinkContainer">
+        <img src="/icon-[idx=]" class="link-icon" />
+        <div>
+          <h class="link-title">[link.title=]</h>
+          <div class="link-desc">
+            [link.desc=]
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+</body>
+
+</html>
