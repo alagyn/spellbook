@@ -14,8 +14,11 @@ class Link:
         self.desc = desc
 
 
-TEMPLATE = "spellbook-template.html"
-OUTPUT = "spellbook.html"
+APP_DIR = os.path.dirname(__file__)
+TEMPLATE_DIR = os.path.join(APP_DIR, "template")
+
+TEMPLATE = os.path.join(TEMPLATE_DIR, "spellbook-template.html")
+FAVICON = os.path.join(TEMPLATE_DIR, "favicon.ico")
 
 
 class Spellbook:
@@ -24,7 +27,6 @@ class Spellbook:
         self.lock = Semaphore()
         self.links: list[Link] = []
         self.title = ""
-        self.favicon = ""
         self.page_bg = ""
         self.tile_bg = ""
         self.tile_fg = ""
@@ -59,8 +61,6 @@ class Spellbook:
         meta = config["meta"]
 
         self.title = meta['title']
-        self.favicon = meta["favicon"]
-
         colors = config["colors"]
 
         self.page_bg = colors["bg"]

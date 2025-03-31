@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 import shutil
 import mimetypes
 
-from spellbook.generator import Spellbook
+from spellbook.generator import Spellbook, FAVICON
 
 spellbook = None
 
@@ -12,6 +12,15 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def __init__(self, request, client_address, server):
         super().__init__(request, client_address, server)
+
+    def sendImage(self, path: str):
+        self.send_response(200)
+        self.send_header("Content-Type", mimetypes.guess_type(path))
+        with open(path, mode='rb') as f:
+            data = f.read()
+        self.send_header("Content-Length", f'{len(data)}')
+        self.end_headers()
+        self.wfile.write(data)
 
     def do_GET(self):
         with spellbook:
@@ -26,27 +35,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
             elif self.path.startswith("/icon-"):
                 idx = int(self.path[len("/icon-"):])
                 if 0 <= idx < len(spellbook.links):
-                    self.send_response(200)
                     iconPath = spellbook.links[idx].icon
-                    self.send_header("Content-Type",
-                                     mimetypes.guess_type(iconPath))
-                    with open(iconPath, mode='rb') as f:
-                        data = f.read()
-                    self.send_header("Content-Length", f'{len(data)}')
-                    self.end_headers()
-                    self.wfile.write(data)
+                    self.sendImage(iconPath)
                 else:
                     self.send_error(http.HTTPStatus.NOT_FOUND)
             elif self.path.startswith("/favicon"):
-                self.send_response(200)
-                iconPath = spellbook.favicon
-                self.send_header("Content-Type",
-                                 mimetypes.guess_type(iconPath))
-                with open(iconPath, mode='rb') as f:
-                    data = f.read()
-                self.send_header("Content-Length", f'{len(data)}')
-                self.end_headers()
-                self.wfile.write(data)
+                self.sendImage(FAVICON)
             else:
                 self.send_error(http.HTTPStatus.NOT_FOUND)
 
@@ -65,11 +59,13 @@ def main():
     global spellbook
     spellbook = Spellbook(config)
 
+    print(f"View at http://localhost:{port}")
+
     httpd = http.server.ThreadingHTTPServer(("", port), Handler)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        pass
+        print("Shutting down")
 
 
 if __name__ == '__main__':
