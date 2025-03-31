@@ -1,6 +1,6 @@
 import http.server
 from argparse import ArgumentParser
-import shutil
+import os
 import mimetypes
 
 from spellbook.generator import Spellbook, FAVICON
@@ -14,6 +14,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         super().__init__(request, client_address, server)
 
     def sendImage(self, path: str):
+        if not os.path.exists(path):
+            self.send_error(http.HTTPStatus.NOT_FOUND)
+            return
         self.send_response(200)
         self.send_header("Content-Type", mimetypes.guess_type(path))
         with open(path, mode='rb') as f:
