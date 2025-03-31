@@ -33,7 +33,7 @@ class Spellbook:
         self.tile_title_bg = ""
         self.tile_title_fg = ""
 
-        self.template = tempest.parse_template(TEMPLATE, "[", "]")
+        self.template = tempest.parse_template_file(TEMPLATE, "[", "]")
         self.config_file = configFile
         self.configModTime = os.path.getmtime(self.config_file)
 
@@ -73,8 +73,6 @@ class Spellbook:
         self.links.clear()
         for l in links:
             self.links.append(Link(l["title"], l["icon"], l['url'], l['desc']))
-
-        return self
 
     def _generate(self):
         out = StringIO()

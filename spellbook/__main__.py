@@ -5,7 +5,7 @@ import mimetypes
 
 from spellbook.generator import Spellbook, FAVICON
 
-spellbook = None
+spellbook: Spellbook = None  # type: ignore
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -18,7 +18,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_error(http.HTTPStatus.NOT_FOUND)
             return
         self.send_response(200)
-        self.send_header("Content-Type", mimetypes.guess_type(path))
+        contentType = mimetypes.guess_type(path)[0]
+        if contentType is None:
+            contentType = "application/octet-stream"
+        self.send_header("Content-Type", contentType)
         with open(path, mode='rb') as f:
             data = f.read()
         self.send_header("Content-Length", f'{len(data)}')
