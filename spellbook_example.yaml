@@ -11,36 +11,36 @@ colors:
 links:
   - title: My Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my first site
 
   - title: My Second Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my second site UwU
   
   - title: My Second Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my second site UwU
 
   - title: My Second Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my second site UwU
 
   - title: My Second Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my second site UwU
 
   - title: My Second Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my second site UwU
 
   - title: My Second Site
     url: https://mysite.com
-    icon: myIcon.png
+    icon: spellbook/template/favicon.ico
     desc: This is my second site UwU
 
