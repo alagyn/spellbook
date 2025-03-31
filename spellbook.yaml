@@ -1,0 +1,46 @@
+meta:
+  title: My Spellbook
+
+colors:
+  bg: rgb(53, 53, 53)
+  tileBg: rgb(100, 100, 100)
+  tileFg: rgb(255, 255, 255)
+  tileTitleBg: rgb(131, 120, 111)
+  tileTitleFg: rgb(255, 255, 255)
+
+links:
+  - title: My Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my first site
+
+  - title: My Second Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my second site UwU
+  
+  - title: My Second Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my second site UwU
+
+  - title: My Second Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my second site UwU
+
+  - title: My Second Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my second site UwU
+
+  - title: My Second Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my second site UwU
+
+  - title: My Second Site
+    url: https://mysite.com
+    icon: myIcon.png
+    desc: This is my second site UwU
+
