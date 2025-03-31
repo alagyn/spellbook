@@ -51,7 +51,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
 def main():
     parser = ArgumentParser()
 
-    parser.add_argument("--port", default=8000)
+    parser.add_argument("--port", default=80)
     parser.add_argument("--config", default="spellbook.yaml")
 
     args = parser.parse_args()
