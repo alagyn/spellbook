@@ -142,7 +142,7 @@
       var request = new Request(
         url, {method: 'HEAD'}
       )
-      const get = await fetch(url).then(
+      const get = await fetch(url, {mode: "no-cors"}).then(
         (res) => {
           if(!res.ok)
           {
