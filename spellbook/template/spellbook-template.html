@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[book.title=]</title>
+  <title>[[book.title=]]</title>
   <style>
     .container {
       display: grid;
       column-gap: 5ch;
       row-gap: 5ch;
       grid-template-columns: repeat(4, 1fr);
+      margin: 2ch;
     }
 
     * {
@@ -46,7 +47,7 @@
     }
 
     .linkContainer-offline {
-      background-color: rgb(94, 47, 47);
+      background-color: [[book.tile_offline_bg=]];
       border-radius: 10px;
       min-height: 50px;
       padding: 10px;
@@ -104,12 +105,20 @@
         grid-template-columns: repeat(3, 1fr);
         column-gap: 1ch;
       }
+
+      img.link-icon {
+        height: 80px;
+      }
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 800px) {
       .container {
         grid-template-columns: repeat(2, 1fr);
         column-gap: 2ch;
+      }
+
+      img.link-icon {
+        height: 50px;
       }
     }
   </style>
