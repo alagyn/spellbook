@@ -15,7 +15,7 @@
     }
 
     * {
-      background-color: [book.page_bg=];
+      background-color: [[book.page_bg=]];
       font-family: sans-serif;
     }
 
@@ -36,11 +36,21 @@
     }
 
     .linkContainer {
-      background-color: [book.tile_bg=];
+      background-color: [[book.tile_bg=]];
       border-radius: 10px;
       min-height: 50px;
       padding: 10px;
-      outline: outset [book.tile_bg=];
+      outline: outset [[book.tile_bg=]];
+      position: relative;
+      transition: bottom 0.2s;
+    }
+
+    .linkContainer-offline {
+      background-color: rgb(94, 47, 47);
+      border-radius: 10px;
+      min-height: 50px;
+      padding: 10px;
+      outline: outset [[book.tile_bg=]];
       position: relative;
       transition: bottom 0.2s;
     }
@@ -50,13 +60,18 @@
     }
 
     .linkContainer * {
-      background-color: [book.tile_bg=];
+      background-color: [[book.tile_bg=]];
+      color: black;
+    }
+
+    .linkContainer-offline * {
+      background-color: [[book.tile_bg=]];
       color: black;
     }
 
     .link-title {
-      background-color: [book.tile_title_bg=];
-      color: [book.tile_title_fg=];
+      background-color: [[book.tile_title_bg=]];
+      color: [[book.tile_title_fg=]];
       border-radius: 5px;
       padding: 4px;
       display: block;
@@ -98,19 +113,58 @@
       }
     }
   </style>
+  <script>
+    const URLS = [
+[[for link in book.links:]]
+  "[[link.href=]]",
+];
+
+
+    function markOffline(id)
+    {
+      document.getElementById(id).className = "linkContainer-offline";
+    }
+
+    async function checkAlive(idx)
+    {
+      const url = URLS[idx];
+      // HEAD method just returns the headers and not a full GET
+      // so we just check if we get a response
+      var request = new Request(
+        url, {method: 'HEAD'}
+      )
+      const get = await fetch(url).then(
+        (res) => {
+          if(!res.ok)
+          {
+            console.log()
+            markOffline(`container${idx}`);
+          }
+        }
+      ).catch(
+        (res) => {
+          markOffline(`container${idx}`);
+        }
+      );
+  }
+
+[[for idx in range(len(book.links)):]]
+  checkAlive([[idx=]]);
+
+  </script>
 </head>
 
 <body>
 <div class="container">
-[for idx, link in enumerate(book.links):]
-  <a class="linkContainer" href="[link.href=]">
+[[for idx, link in enumerate(book.links):]]
+  <a class="linkContainer" id="container[[idx=]]" href="[[link.href=]]">
     <div class="fill-div">
       <div class="innerLinkContainer">
-        <img src="/icon-[idx=]" class="link-icon" />
+        <img src="/icon-[[idx=]]" class="link-icon" />
         <div>
-          <h class="link-title">[link.title=]</h>
+          <h class="link-title">[[link.title=]]</h>
           <div class="link-desc">
-            [link.desc=]
+            [[link.desc=]]
           </div>
         </div>
       </div>

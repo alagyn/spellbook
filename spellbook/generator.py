@@ -33,7 +33,7 @@ class Spellbook:
         self.tile_title_bg = ""
         self.tile_title_fg = ""
 
-        self.template = tempest.parse_template_file(TEMPLATE, "[", "]")
+        self.template = tempest.parse_template_file(TEMPLATE, "[[", "]]")
         self.config_file = configFile
         self.configModTime = os.path.getmtime(self.config_file)
 
