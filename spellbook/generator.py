@@ -32,7 +32,6 @@ class Spellbook:
         self.tile_fg = ""
         self.tile_title_bg = ""
         self.tile_title_fg = ""
-        self.tile_offline_bg = ""
 
         self.template = tempest.parse_template_file(TEMPLATE, "[[", "]]")
         self.config_file = configFile
@@ -69,7 +68,6 @@ class Spellbook:
         self.tile_fg = colors["tileFg"]
         self.tile_title_bg = colors["tileTitleBg"]
         self.tile_title_fg = colors["tileTitleFg"]
-        self.tile_offline_bg = colors["tileOfflineBg"]
 
         links = config["links"]
         self.links.clear()

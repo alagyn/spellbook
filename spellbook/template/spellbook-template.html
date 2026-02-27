@@ -46,26 +46,11 @@
       transition: bottom 0.2s;
     }
 
-    .linkContainer-offline {
-      background-color: [[book.tile_offline_bg=]];
-      border-radius: 10px;
-      min-height: 50px;
-      padding: 10px;
-      outline: outset [[book.tile_bg=]];
-      position: relative;
-      transition: bottom 0.2s;
-    }
-
     .linkContainer:hover {
       bottom: 5px
     }
 
     .linkContainer * {
-      background-color: [[book.tile_bg=]];
-      color: black;
-    }
-
-    .linkContainer-offline * {
       background-color: [[book.tile_bg=]];
       color: black;
     }
@@ -122,45 +107,6 @@
       }
     }
   </style>
-  <script>
-    const URLS = [
-[[for link in book.links:]]
-  "[[link.href=]]",
-];
-
-
-    function markOffline(id)
-    {
-      document.getElementById(id).className = "linkContainer-offline";
-    }
-
-    async function checkAlive(idx)
-    {
-      const url = URLS[idx];
-      // HEAD method just returns the headers and not a full GET
-      // so we just check if we get a response
-      var request = new Request(
-        url, {method: 'HEAD'}
-      )
-      const get = await fetch(url, {mode: "no-cors"}).then(
-        (res) => {
-          if(!res.ok)
-          {
-            console.log()
-            markOffline(`container${idx}`);
-          }
-        }
-      ).catch(
-        (res) => {
-          markOffline(`container${idx}`);
-        }
-      );
-  }
-
-[[for idx in range(len(book.links)):]]
-  checkAlive([[idx=]]);
-
-  </script>
 </head>
 
 <body>
