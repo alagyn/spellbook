@@ -22,6 +22,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if contentType is None:
             contentType = "application/octet-stream"
         self.send_header("Content-Type", contentType)
+        self.send_header("Cache-Control", "public, max-age=604800")
         with open(path, mode='rb') as f:
             data = f.read()
         self.send_header("Content-Length", f'{len(data)}')
