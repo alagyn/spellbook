@@ -2,6 +2,7 @@ import http.server
 from argparse import ArgumentParser
 import os
 import mimetypes
+import signal
 
 from spellbook.generator import Spellbook, FAVICON
 
@@ -52,6 +53,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 self.send_error(http.HTTPStatus.NOT_FOUND)
 
 
+def sig_handler(_sig, _frame):
+    raise KeyboardInterrupt()
+
+
 def main():
     parser = ArgumentParser()
 
@@ -66,7 +71,9 @@ def main():
     global spellbook
     spellbook = Spellbook(config)
 
-    print(f"View at http://localhost:{port}")
+    print(f"View at http://localhost:{port}", flush=True)
+
+    signal.signal(signal.SIGTERM, sig_handler)
 
     httpd = http.server.ThreadingHTTPServer(("", port), Handler)
     try:
